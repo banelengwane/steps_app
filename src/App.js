@@ -7,6 +7,14 @@ const messages = [
 ];
 
 export default function App() {
+  return (
+    <div>
+      <Step />
+    </div>
+  );
+}
+
+function Step() {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
   // event handler function
@@ -18,6 +26,7 @@ export default function App() {
     if (step < 3) setStep((s) => s + 1);
   }
 
+  console.log(new Date().toDateString());
   return (
     <>
       <button className="close" onClick={() => setIsOpen((is) => !is)}>
@@ -35,21 +44,26 @@ export default function App() {
           </p>
 
           <div className="buttons">
-            <button
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
-              onClick={handlePrevious}
-            >
-              Previous
-            </button>
-            <button
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
-              onClick={handleNext}
-            >
-              Next
-            </button>
+            <Button bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}>
+              <span>👈</span> Previous{" "}
+            </Button>
+            <Button bgColor="#7950f2" textColor="#fff" onClick={handleNext}>
+              <span>Next 👉</span>
+            </Button>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function Button({ bgColor, textColor, onClick, children }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 }
